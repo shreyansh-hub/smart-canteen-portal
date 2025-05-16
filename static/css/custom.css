@@ -1,0 +1,115 @@
+/* Custom styles for Canteen Automation System */
+
+/* Make footer stick to bottom */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+/* Card hover effect */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Improve spacing */
+.container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Custom badge styling */
+.badge {
+  padding: 0.5em 0.8em;
+}
+
+/* Status badge colors - redundant but kept for clarity */
+.badge-pending {
+  background-color: var(--bs-warning);
+  color: var(--bs-dark);
+}
+
+.badge-confirmed {
+  background-color: var(--bs-success);
+}
+
+.badge-preparing {
+  background-color: var(--bs-info);
+}
+
+.badge-ready {
+  background-color: var(--bs-primary);
+}
+
+.badge-delivered {
+  background-color: var(--bs-secondary);
+}
+
+.badge-cancelled {
+  background-color: var(--bs-danger);
+}
+
+/* Improve form controls */
+.form-control:focus, .form-select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Improve table responsiveness */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Improve alerts */
+.alert {
+  border: none;
+  border-radius: 0.5rem;
+}
+
+/* Custom card header */
+.card-header {
+  background-color: rgba(var(--bs-primary-rgb), 0.1);
+  border-bottom: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+}
+
+/* Custom nav tabs */
+.nav-tabs .nav-link {
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--bs-secondary);
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom-color: var(--bs-primary);
+  color: var(--bs-primary);
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom-color: var(--bs-primary);
+  color: var(--bs-primary);
+  background-color: transparent;
+}
+
+/* Toast styling */
+.toast {
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+.toast-header {
+  background-color: rgba(var(--bs-primary-rgb), 0.2);
+  color: var(--bs-primary);
+}

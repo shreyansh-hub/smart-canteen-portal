@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Canteen - Canteen Automation System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h2 class="card-title">
+                    <i class="fas fa-utensils me-2"></i>Manage Your Canteen
+                </h2>
+                <p class="card-text">{{ canteen.name }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4><i class="fas fa-info-circle me-2"></i>Canteen Details</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ canteen.name }}</h5>
+                <p class="card-text">{{ canteen.description }}</p>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ canteen.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact:</th>
+                            <td>{{ canteen.contact_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Address:</th>
+                            <td>{{ canteen.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>
+                                <span class="badge 
+                                    {% if canteen.status == 'approved' %}bg-success
+                                    {% elif canteen.status == 'pending' %}bg-warning
+                                    {% else %}bg-danger{% endif %}">
+                                    {{ canteen.status|capitalize }}
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-edit me-1"></i>Edit Details
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4><i class="fas fa-university me-2"></i>Bank Details</h4>
+            </div>
+            <div class="card-body">
+                {% if canteen.bank_details %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Account Holder:</th>
+                                <td>{{ canteen.bank_details.account_holder }}</td>
+                            </tr>
+                            <tr>
+                                <th>Account Number:</th>
+                                <td>{{ canteen.bank_details.account_number|last(4)|padleft(canteen.bank_details.account_number|length, '*') }}</td>
+                            </tr>
+                            <tr>
+                                <th>Bank Name:</th>
+                                <td>{{ canteen.bank_details.bank_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>IFSC Code:</th>
+                                <td>{{ canteen.bank_details.ifsc_code }}</td>
+                            </tr>
+                            {% if canteen.bank_details.upi_id %}
+                            <tr>
+                                <th>UPI ID:</th>
+                                <td>{{ canteen.bank_details.upi_id }}</td>
+                            </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>No bank details found. Please add your bank details to receive payments.
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card-footer">
+                {% if canteen.bank_details %}
+                    <a href="{{ url_for('canteen.update_bank_details', canteen_id=canteen.id) }}" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-edit me-1"></i>Update Bank Details
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('canteen.add_bank_details', canteen_id=canteen.id) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus-circle me-1"></i>Add Bank Details
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h4><i class="fas fa-chart-line me-2"></i>Order Statistics</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-center">
+                    <i class="fas fa-chart-pie fa-5x mb-3 text-primary"></i>
+                </p>
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h3 class="text-info">0</h3>
+                        <p>Today's Orders</p>
+                    </div>
+                    <div class="col-6">
+                        <h3 class="text-success">₹0.00</h3>
+                        <p>Today's Revenue</p>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle me-2"></i>Detailed statistics will be available once your canteen is approved and receives orders.
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-outline-primary btn-sm disabled">
+                    <i class="fas fa-chart-bar me-1"></i>View Full Report
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-utensils me-2"></i>Menu Management</h4>
+            </div>
+            <div class="card-body">
+                {% if canteen.status == 'approved' %}
+                    <p>Manage your menu items here. Add, edit, or remove items as needed.</p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-1"></i>Add Menu Item
+                    </a>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>You can manage your menu once your canteen is approved by the administrator.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

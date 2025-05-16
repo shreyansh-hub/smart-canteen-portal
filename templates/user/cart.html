@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart - Canteen Automation System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h2 class="card-title">
+                    <i class="fas fa-shopping-cart me-2"></i>Your Cart
+                </h2>
+                <p class="card-text">Review your items and proceed to checkout.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if cart and cart|length > 0 %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-list me-2"></i>Cart Items</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-items">
+                            {% for item in cart %}
+                            <tr id="cart-row-{{ item.id }}">
+                                <td>{{ item.name }}</td>
+                                <td>${{ "%.2f"|format(item.price) }}</td>
+                                <td>
+                                    <div class="input-group" style="width: 120px;">
+                                        <button class="btn btn-sm btn-outline-secondary decrease-quantity" data-item-id="{{ item.id }}">-</button>
+                                        <input type="number" class="form-control text-center item-quantity" value="{{ item.quantity }}" min="1" data-item-id="{{ item.id }}" readonly>
+                                        <button class="btn btn-sm btn-outline-secondary increase-quantity" data-item-id="{{ item.id }}">+</button>
+                                    </div>
+                                </td>
+                                <td class="item-subtotal" data-item-id="{{ item.id }}">${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger remove-item" data-item-id="{{ item.id }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-end mt-3">
+                    <button id="clear-cart" class="btn btn-outline-danger">
+                        <i class="fas fa-trash-alt me-1"></i>Clear Cart
+                    </button>
+                    <a href="{{ url_for('menu.user_menu') }}" class="btn btn-primary ms-2">
+                        <i class="fas fa-utensils me-1"></i>Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4><i class="fas fa-receipt me-2"></i>Order Summary</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">${{ "%.2f"|format(total) }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Service Fee:</span>
+                    <span>$0.00</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-3">
+                    <strong>Total:</strong>
+                    <strong id="cart-total">${{ "%.2f"|format(total) }}</strong>
+                </div>
+                <form method="POST" action="{{ url_for('orders.checkout') }}">
+                    <div class="mb-3">
+                        <label for="payment_method" class="form-label">Payment Method</label>
+                        <select class="form-select" id="payment_method" name="payment_method" required>
+                            <option value="">Select payment method</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="Debit Card">Debit Card</option>
+                            <option value="Mobile Payment">Mobile Payment</option>
+                        </select>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check-circle me-1"></i>Place Order
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-shopping-cart fa-4x mb-3 text-muted"></i>
+                <h4>Your cart is empty</h4>
+                <p>Browse our menu to add items to your cart.</p>
+                <a href="{{ url_for('menu.user_menu') }}" class="btn btn-primary">
+                    <i class="fas fa-utensils me-1"></i>View Menu
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+{% endblock %}

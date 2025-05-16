@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% block title %}Order Confirmation - Canteen
+Automation System{% endblock %} {% block content %}
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="card bg-success text-white">
+      <div class="card-body">
+        <h2 class="card-title">
+          <i class="fas fa-check-circle me-2"></i>Order Confirmed
+        </h2>
+        <p class="card-text">Your order has been successfully placed!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="card mb-4">
+      <div class="card-header">
+        <h4><i class="fas fa-receipt me-2"></i>Order Details</h4>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <p>
+              <strong>Order ID:</strong> {{ order.id | string | slice(0, 8) }}
+            </p>
+            <p>
+              <strong>Date:</strong> {{ order.created_at.strftime('%Y-%m-%d
+              %H:%M') }}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p>
+              <strong>Status:</strong>
+              <span
+                class="badge {% if order.status == 'confirmed' %}bg-success {% elif order.status == 'pending' %}bg-warning {% elif order.status == 'cancelled' %}bg-danger {% elif order.status == 'preparing' %}bg-info {% elif order.status == 'ready' %}bg-primary {% else %}bg-secondary{% endif %}"
+              >
+                {{ order.status|capitalize }}
+              </span>
+            </p>
+            <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+          </div>
+        </div>
+
+        <hr />
+
+        <h5 class="mb-3">Items</h5>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in order.items %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>${{ "%.2f"|format(item.price) }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ "%.2f"|format(item.price * item.quantity) }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                <td>
+                  <strong>${{ "%.2f"|format(order.total_price) }}</strong>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="alert alert-info mt-4">
+          <h5 class="alert-heading">
+            <i class="fas fa-info-circle me-2"></i>Next Steps
+          </h5>
+          <p>
+            Your order has been confirmed and is being prepared. You will be
+            notified when it's ready for pickup.
+          </p>
+          <hr />
+          <p class="mb-0">
+            Order Number:
+            <strong>{{ order.id | string | slice(0, 8) }} </strong> (Use this
+            number when collecting your order)
+          </p>
+        </div>
+
+        <div class="text-center mt-4">
+          <a
+            href="{{ url_for('menu.user_dashboard') }}"
+            class="btn btn-primary me-2"
+          >
+            <i class="fas fa-home me-1"></i>Back to Dashboard
+          </a>
+          <a
+            href="{{ url_for('menu.user_menu') }}"
+            class="btn btn-outline-primary"
+          >
+            <i class="fas fa-utensils me-1"></i>Place Another Order
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

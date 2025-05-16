@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Bank Details - Canteen Automation System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h2 class="card-title">
+                    <i class="fas fa-university me-2"></i>Bank Details
+                </h2>
+                <p class="card-text">Setup your bank account details to receive payments.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    {% if bank_details %}
+                        <i class="fas fa-edit me-2"></i>Update Bank Details
+                    {% else %}
+                        <i class="fas fa-plus-circle me-2"></i>Add Bank Details
+                    {% endif %}
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% if bank_details %}{{ url_for('canteen.update_bank_details', canteen_id=canteen_id) }}{% else %}{{ url_for('canteen.add_bank_details', canteen_id=canteen_id) }}{% endif %}">
+                    {{ form.hidden_tag() }}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>These bank details will be used to transfer payments for orders placed at your canteen.
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="account_holder" class="form-label">Account Holder Name <span class="text-danger">*</span></label>
+                        {{ form.account_holder(class="form-control", placeholder="Full name as per bank records") }}
+                        {% if form.account_holder.errors %}
+                            <div class="text-danger">
+                                {% for error in form.account_holder.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="account_number" class="form-label">Account Number <span class="text-danger">*</span></label>
+                        {{ form.account_number(class="form-control", placeholder="Your bank account number") }}
+                        {% if form.account_number.errors %}
+                            <div class="text-danger">
+                                {% for error in form.account_number.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="bank_name" class="form-label">Bank Name <span class="text-danger">*</span></label>
+                        {{ form.bank_name(class="form-control", placeholder="Name of your bank") }}
+                        {% if form.bank_name.errors %}
+                            <div class="text-danger">
+                                {% for error in form.bank_name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ifsc_code" class="form-label">IFSC Code <span class="text-danger">*</span></label>
+                        {{ form.ifsc_code(class="form-control", placeholder="IFSC code of your bank branch") }}
+                        {% if form.ifsc_code.errors %}
+                            <div class="text-danger">
+                                {% for error in form.ifsc_code.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="upi_id" class="form-label">UPI ID <small class="text-muted">(Optional)</small></label>
+                        {{ form.upi_id(class="form-control", placeholder="Your UPI ID for instant payments (optional)") }}
+                        {% if form.upi_id.errors %}
+                            <div class="text-danger">
+                                {% for error in form.upi_id.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            {% if bank_details %}
+                                <i class="fas fa-save me-1"></i>Update Details
+                            {% else %}
+                                <i class="fas fa-save me-1"></i>Save Details
+                            {% endif %}
+                        </button>
+                        <a href="{{ url_for('canteen.manage_canteen') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-1"></i>Back to Canteen Management
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

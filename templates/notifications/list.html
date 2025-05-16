@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Notifications - Canteen Automation System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h2 class="card-title">
+                    <i class="fas fa-bell me-2"></i>Notifications
+                </h2>
+                <p class="card-text">View all your notifications.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-bell me-2"></i>All Notifications</h4>
+            </div>
+            <div class="card-body">
+                {% if notifications %}
+                    <div class="list-group">
+                        {% for notification in notifications %}
+                            <div class="list-group-item list-group-item-action{% if not notification.is_read %} list-group-item-primary{% endif %}">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{ notification.title }}</h5>
+                                    <small>{{ notification.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                                </div>
+                                <p class="mb-1">{{ notification.message }}</p>
+                                <small>
+                                    <span class="badge {% if notification.notification_type == 'email' %}bg-info{% else %}bg-warning{% endif %}">
+                                        {{ notification.notification_type }}
+                                    </span>
+                                    {% if not notification.is_read %}
+                                        <a href="{{ url_for('notifications.mark_notification_read', notification_id=notification.id) }}" class="ms-2">
+                                            <i class="fas fa-check me-1"></i>Mark as read
+                                        </a>
+                                    {% endif %}
+                                </small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>You have no notifications.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Menu - Canteen Automation System{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h2 class="card-title">
+                    <i class="fas fa-utensils me-2"></i>Menu
+                </h2>
+                <p class="card-text">Browse our menu and add items to your cart.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" id="menuTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
+                    </li>
+                    {% for category in categories %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="{{ category|lower|replace(' ', '-') }}-tab" data-bs-toggle="tab" data-bs-target="#{{ category|lower|replace(' ', '-') }}" type="button" role="tab" aria-controls="{{ category|lower|replace(' ', '-') }}" aria-selected="false">{{ category }}</button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="menuTabsContent">
+                    <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                        <div class="row">
+                            {% for item in menu_items %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
+                                        <p class="card-text">{{ item.description }}</p>
+                                        <p class="card-text"><strong>${{ "%.2f"|format(item.price) }}</strong></p>
+                                        <div class="d-flex align-items-center">
+                                            <input type="number" class="form-control me-2" id="quantity-{{ item.id }}" min="1" value="1" style="width: 70px;">
+                                            <button class="btn btn-primary add-to-cart" data-item-id="{{ item.id }}" data-item-name="{{ item.name }}" data-item-price="{{ item.price }}">
+                                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    {% for category in categories %}
+                    <div class="tab-pane fade" id="{{ category|lower|replace(' ', '-') }}" role="tabpanel" aria-labelledby="{{ category|lower|replace(' ', '-') }}-tab">
+                        <div class="row">
+                            {% for item in menu_items if item.category == category %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
+                                        <p class="card-text">{{ item.description }}</p>
+                                        <p class="card-text"><strong>${{ "%.2f"|format(item.price) }}</strong></p>
+                                        <div class="d-flex align-items-center">
+                                            <input type="number" class="form-control me-2" id="quantity-{{ item.id }}-{{ category|lower|replace(' ', '-') }}" min="1" value="1" style="width: 70px;">
+                                            <button class="btn btn-primary add-to-cart" data-item-id="{{ item.id }}" data-item-name="{{ item.name }}" data-item-price="{{ item.price }}">
+                                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+{% endblock %}
