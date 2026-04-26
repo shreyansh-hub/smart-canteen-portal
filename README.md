@@ -1,83 +1,98 @@
-# Canteen Automation System
+# 🍽 Smart Canteen Portal
 
-A comprehensive web application for automating canteen operations in schools, colleges, and offices. The system allows users to browse menus, place orders, and make payments using various payment methods.
+A full-stack web application designed to automate canteen operations for schools, colleges, and offices. It enables users to browse menus, place orders, and make secure online payments while providing powerful admin controls.
 
-## Features
+---
 
-- **User Authentication**: Secure login and registration system with password reset functionality
-- **Multiple User Roles**: Support for regular users, canteen owners, and admin roles
-- **Menu Management**: Add, edit, and delete menu items with availability control
-- **Order Processing**: Place orders, track status, and receive notifications
-- **Payment Integration**: Secure payments using Stripe for UPI and card transactions
-- **Canteen Registration**: Schools/colleges/offices can register their canteens
-- **Real-time Notifications**: Email (SendGrid) and SMS (Twilio) notifications
-- **Banking Integration**: Canteens can set up bank details to receive payments
+## 🚀 Features
 
-## Technologies Used
+### 👤 User Features
 
-- **Backend**: Flask (Python)
-- **Database**: PostgreSQL with SQLAlchemy ORM
-- **Authentication**: Flask-Login
-- **Payments**: Stripe API
-- **Notifications**: SendGrid (Email), Twilio (SMS)
-- **Frontend**: Bootstrap, JavaScript
-
-## Installation
-
-1. Clone the repository:
-```
-git clone https://github.com/yourusername/canteen-automation-system.git
-cd canteen-automation-system
-```
-
-2. Install dependencies:
-```
-pip install -r requirements.txt
-```
-
-3. Set up environment variables:
-```
-export DATABASE_URL=your_database_url
-export SENDGRID_API_KEY=your_sendgrid_api_key
-export TWILIO_ACCOUNT_SID=your_twilio_account_sid
-export TWILIO_AUTH_TOKEN=your_twilio_auth_token
-export TWILIO_PHONE_NUMBER=your_twilio_phone_number
-export STRIPE_SECRET_KEY=your_stripe_secret_key
-```
-
-4. Initialize the database:
-```
-flask db upgrade
-```
-
-5. Run the application:
-```
-flask run
-```
-
-## Usage
-
-### Admin Dashboard
-- Manage canteens, menu items, and user accounts
-- View and process orders
-- Access payment history
-
-### Canteen Management
-- Register new canteens
-- Add bank details for payment processing
-- Manage menu items
-
-### User Interface
+- User registration & login (secure authentication)
 - Browse menu items
-- Add items to cart
-- Place orders
-- Make payments
-- View order history and status
+- Add to cart & place orders
+- Online payment (UPI / Card)
+- Order history & status tracking
 
-## Contributing
+### 🛠 Admin Features
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- Admin dashboard
+- Manage menu items (add/edit/delete)
+- Order management system
+- Payment tracking
+- Handle custom requests
 
-## License
+### 🏢 Canteen Owner Features
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+- Register canteen
+- Manage menu & availability
+- Add bank details for payments
+
+---
+
+## 💳 Payment & Notifications
+
+- Razorpay integration for payments
+- Email notifications using SendGrid
+
+---
+
+## 🛠 Tech Stack
+
+| Layer     | Technology                       |
+| --------- | -------------------------------- |
+| Backend   | Python (Flask)                   |
+| Database  | SQLite (SQLAlchemy ORM)          |
+| Frontend  | HTML, CSS, Bootstrap, JavaScript |
+| Auth      | Flask-Login                      |
+| Payments  | Razorpay                         |
+| Messaging | SendGrid                         |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the repository
+
+git clone https://github.com/shreyansh-hub/smart-canteen-portal.git
+
+cd smart-canteen-portal
+
+### 2️⃣ Install dependencies
+
+pip install -r requirements.txt
+
+### 3️⃣ Configure environment variables
+
+Create a `.env` file and add:
+
+DATABASE_URL=your_database_url
+SENDGRID_API_KEY=your_sendgrid_api_key
+RAZORPAY_KEY_ID=your_key
+RAZORPAY_SECRET=your_secret
+
+---
+
+### 4️⃣ Run database migrations
+
+flask db upgrade
+
+---
+
+### 5️⃣ Run the application
+
+flask run
+
+---
+
+## 📈 Future Enhancements
+
+- Mobile app integration
+- AI-based recommendations
+- Advanced analytics dashboard
+
+---
+
+## 👨‍💻 Author
+
+Shreyansh Mishra
