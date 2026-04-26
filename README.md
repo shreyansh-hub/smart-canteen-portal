@@ -7,7 +7,6 @@ A full-stack web application designed to automate canteen operations for schools
 ## 🚀 Features
 
 ### 👤 User Features
-
 - User registration & login (secure authentication)
 - Browse menu items
 - Add to cart & place orders
@@ -15,15 +14,13 @@ A full-stack web application designed to automate canteen operations for schools
 - Order history & status tracking
 
 ### 🛠 Admin Features
-
 - Admin dashboard
-- Manage menu items (add/edit/delete)
+- Manage menu items (add / edit / delete)
 - Order management system
 - Payment tracking
 - Handle custom requests
 
 ### 🏢 Canteen Owner Features
-
 - Register canteen
 - Manage menu & availability
 - Add bank details for payments
@@ -32,15 +29,15 @@ A full-stack web application designed to automate canteen operations for schools
 
 ## 💳 Payment & Notifications
 
-- Razorpay integration for payments
+- Razorpay integration for secure payments
 - Email notifications using SendGrid
 
 ---
 
-## 🛠 Tech Stack
+## 🧰 Tech Stack
 
 | Layer     | Technology                       |
-| --------- | -------------------------------- |
+|-----------|----------------------------------|
 | Backend   | Python (Flask)                   |
 | Database  | SQLite (SQLAlchemy ORM)          |
 | Frontend  | HTML, CSS, Bootstrap, JavaScript |
@@ -54,45 +51,52 @@ A full-stack web application designed to automate canteen operations for schools
 
 ### 1️⃣ Clone the repository
 
+```bash
 git clone https://github.com/shreyansh-hub/smart-canteen-portal.git
-
 cd smart-canteen-portal
+```
 
 ### 2️⃣ Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
 ### 3️⃣ Configure environment variables
 
 Create a `.env` file and add:
 
+```env
 DATABASE_URL=your_database_url
 SENDGRID_API_KEY=your_sendgrid_api_key
 RAZORPAY_KEY_ID=your_key
 RAZORPAY_SECRET=your_secret
-
----
+```
 
 ### 4️⃣ Run database migrations
 
+```bash
 flask db upgrade
-
----
+```
 
 ### 5️⃣ Run the application
 
+```bash
 flask run
+```
 
 ---
 
 ## 📈 Future Enhancements
 
-- Mobile app integration
-- AI-based recommendations
-- Advanced analytics dashboard
+- [ ] Mobile app integration
+- [ ] AI-based menu recommendations
+- [ ] Advanced analytics dashboard
 
 ---
 
 ## 👨‍💻 Author
 
-Shreyansh Mishra
+**Shreyansh Mishra**
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/shreyansh-mishra05/)
+[![Email](https://img.shields.io/badge/Email-red?style=flat&logo=gmail)](mailto:shreyansh.mishra0009@gmail.com)
