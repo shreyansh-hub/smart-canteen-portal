@@ -70,5 +70,3 @@ flask run
 ---
 ## Author
 **Shreyansh Mishra**
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/shreyansh-mishra05/)
-[![Email](https://img.shields.io/badge/Email-red?style=flat&logo=gmail)](mailto:shreyansh.mishra0009@gmail.com)
