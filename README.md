@@ -1,74 +1,71 @@
 # Smart Canteen Portal
-
-A full-stack web app to manage canteen operations — built for schools, colleges, and offices. Users can browse the menu, place orders, and pay online. Admins and canteen owners get their own dashboards to manage everything on the backend.
-
+A full-stack web application designed to automate canteen operations for schools, colleges, and offices. It enables users to browse menus, place orders, and make secure online payments while providing powerful admin controls.
 ---
-
-## Why I built this
-
-Canteen queues are slow and cash payments are a mess. This tries to fix that — orders go through the app, payments are handled online, and the kitchen knows exactly what's coming in.
-
+## Features
+### User Features
+- User registration & login (secure authentication)
+- Browse menu items
+- Add to cart & place orders
+- Online payment (UPI / Card)
+- Order history & status tracking
+### Admin Features
+- Admin dashboard
+- Manage menu items (add / edit / delete)
+- Order management system
+- Payment tracking
+- Handle custom requests
+### Canteen Owner Features
+- Register canteen
+- Manage menu & availability
+- Add bank details for payments
 ---
-
-## What's inside
-
-**For users**
-- Register, log in, browse the menu
-- Add items to cart and place orders
-- Pay via UPI or card (Razorpay)
-- Track order status and view past orders
-
-**For admins**
-- Dashboard to manage orders and payments
-- Add, edit, or remove menu items
-- Handle custom requests from users
-
-**For canteen owners**
-- Register their canteen
-- Control menu availability
-- Add bank details to receive payments
-
+## Payment & Notifications
+- Razorpay integration for secure payments
+- Email notifications using SendGrid
 ---
-
-## Tech used
-
-- **Backend** — Python, Flask
-- **Database** — SQLite with SQLAlchemy ORM
-- **Frontend** — HTML, CSS, Bootstrap, JavaScript
-- **Auth** — Flask-Login
-- **Payments** — Razorpay
-- **Email notifications** — SendGrid
-
+## Tech Stack
+| Layer     | Technology                       |
+|-----------|----------------------------------|
+| Backend   | Python (Flask)                   |
+| Database  | SQLite (SQLAlchemy ORM)          |
+| Frontend  | HTML, CSS, Bootstrap, JavaScript |
+| Auth      | Flask-Login                      |
+| Payments  | Razorpay                         |
+| Messaging | SendGrid                         |
 ---
-
-## Running it locally
-
+## Setup Instructions
+### Clone the repository
 ```bash
 git clone https://github.com/shreyansh-hub/smart-canteen-portal.git
 cd smart-canteen-portal
+```
+### Install dependencies
+```bash
 pip install -r requirements.txt
 ```
-
-Create a `.env` file and fill in:
-
+### Configure environment variables
+Create a `.env` file and add:
 ```env
 DATABASE_URL=your_database_url
 SENDGRID_API_KEY=your_sendgrid_api_key
 RAZORPAY_KEY_ID=your_key
 RAZORPAY_SECRET=your_secret
 ```
-
-Then:
-
+### Run database migrations
 ```bash
 flask db upgrade
+```
+### Run the application
+```bash
 flask run
 ```
-
 ---
-
-## What I'd add next
-
-- Mobile app
-- Analytics for canteen owners (peak hours, popular items, etc.)
-- Menu recommendations based on order history
+## Future Enhancements
+- [ ] Mobile app integration
+- [ ] AI-based menu recommendations
+- [ ] Advanced analytics dashboard
+---
+## Author
+**Shreyansh Mishra**
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/shreyansh-mishra05/)
+[![Email](https://img.shields.io/badge/Email-red?style=flat&logo=gmail)](mailto:shreyansh.mishra0009@gmail.com)
