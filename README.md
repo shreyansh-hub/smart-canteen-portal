@@ -1,6 +1,8 @@
 # Smart Canteen Portal
 ---
+
 A full-stack web application designed to automate canteen operations for schools, colleges, and offices. It enables users to browse menus, place orders, and make secure online payments while providing powerful admin controls.
+
 ---
 ## Features
 ### User Features
